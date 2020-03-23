@@ -8,6 +8,7 @@ IFS=$'\n' # split by new line
 for image in $(find $src -type f -iname "*.jpg");
 do
     # create folder (if not exist) from modified date
-    moddate=$(stat --format %y $image | awk -F ' ' '{print $2}' | read modified; date -d "$modified" +'%Y-%m')
-    mkdir -p $des/$moddate; mv $image $des/$moddate/
+    modlong=$(stat --format %y $image | awk -F ' ' '{print $1}')
+    modshort=$(date -d "$modlong" +'%Y-%m')
+    mkdir -p $des/$modshort; mv $image $des/$modshort/
 done
