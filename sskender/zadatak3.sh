@@ -7,11 +7,11 @@ do
 
     formatlog=''
 
-    IFS=$'\n'
+    IFS=$'\n' # split only by new lines
     for line in $(cat $file | awk -F '"' '{print $2}' | sort | uniq);
     do
         formatlog+="$(grep -c $line $file) : $line\n"
     done
 
-    echo -e $formatlog | sort -V -r
+    echo -e $formatlog | sort -V -r # natural reverse sort
 done
