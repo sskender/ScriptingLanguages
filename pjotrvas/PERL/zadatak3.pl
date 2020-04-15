@@ -2,19 +2,19 @@
 
 foreach $file (@ARGV) {
 
-	@datoteka = split /\./, $file;
-	$datum=$datoteka[1];
-
-	print "Datum: " . $datum . "\n" . "sat : broj pristupa\n";
-	print "-------------------------------\n";				
 	open LOGDAT, "<", "$file";
 
 	while (defined ($redak = <LOGDAT>)) {
-		 @parts = split(/:/, $redak);
-                 $sat = $parts[1];
+		 @splitRed = split /:/, $redak;
+		 $sat = $splitRed[1];
 		 $sati[$sat] += 1;		
 
 	}
+	@datum = split / /, $splitRed[0];
+	$datum[3]=~ s|^.*\[(.{2}/.{3}/.{4}).*$|$1|;
+
+	print "Datum: " . $datum[3] . "\n" . "sat : broj pristupa\n";
+	print "-------------------------------\n";				
 
 	$indeks = 0;
 	foreach (@sati) {
