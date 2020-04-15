@@ -12,10 +12,13 @@ while(defined ($redak=<>)){
     $ime=$redak[1];
     $prezime=$redak[2];
 
+    splice @redak, 0, 3;
     $sumaRedak=0;
-    for(my $i = 3; $i <= $#redak; $i++){
-        $redak[$i]=~ s/-/0/;
-        $sumaRedak+=$faktori[$i-3]*$redak[$i];
+    $i=0;
+    foreach (@redak){
+        $_=~ s/-/0/;
+        $sumaRedak+=$faktori[$i]*$_;
+        ++$i;
     } 
     $rang[$noRed]=sprintf("%06.2f;%s;%s;%s", $sumaRedak, $jmbag, $prezime, $ime);
    $noRed++; 
