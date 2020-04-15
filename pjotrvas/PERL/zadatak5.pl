@@ -23,13 +23,11 @@ while (defined ($redak = <>)) {
 	$noRed++;
 }
 
-@rangSorted=reverse sort(@rangLista);
+@sortRang=reverse sort(@rangLista);
 
 $noRed=1;
-foreach (@rangSorted) {
+foreach (@sortRang) {
 	@redak=split /;/, $_;
 	printf("%3d. %-32s:% 6.2f\n", $noRed, "$redak[2], $redak[3] ($redak[1])", $redak[0]);
 	$noRed++;
 }
-	
-
