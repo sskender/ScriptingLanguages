@@ -18,13 +18,7 @@ foreach $file (@ARGV) {
 }
 
 @sortRang = reverse sort (@rang);
-$noRed = 1;
-
-foreach (@sortRang) {
-    ($sumaRedak, $jmbag, $prezime, $ime) = split /;/, $_;
-    printf("%3d. %-32s:% 6.2f\n", $noRed, "$ime, $prezime ($jmbag)", $sumaRedak);
-    $noRed++;
- }
+&printer(@sortRang);
 }
 
 sub racunajSumu {
@@ -37,4 +31,15 @@ sub racunajSumu {
             ++$i;
     } 
     return $sumaRedak;
+}
+
+sub printer {
+    @rang =  @_;
+    $pozicija = 1;
+
+    foreach (@rang) {
+    ($sumaRedak, $jmbag, $prezime, $ime) = split /;/, $_;
+    printf("%3d. %-32s:% 6.2f\n", $pozicija, "$ime, $prezime ($jmbag)", $sumaRedak);
+    $pozicija++;
+ }
 }
