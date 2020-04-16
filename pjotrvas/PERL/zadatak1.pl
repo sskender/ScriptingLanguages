@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 
 print "Unesite niz znakova:\n";
 
