@@ -11,14 +11,14 @@ foreach $file (@ARGV) {
 	while (defined ($redak = <LOGDAT>)) {
         ($jmbag, $ime, $prezime, @komponente) = split /;/, $redak;
 
-    $sumaRedak = &racunajSumu(@komponente);     
+        $sumaRedak = &racunajSumu(@komponente);     
    
-    $rang[$noRed]=sprintf("%06.2f;%s;%s;%s", $sumaRedak, $jmbag, $prezime, $ime);
-    $noRed++; 
-}
+        $rang[$noRed]=sprintf("%06.2f;%s;%s;%s", $sumaRedak, $jmbag, $prezime, $ime);
+        $noRed++; 
+    }
 
-@sortRang = reverse sort (@rang);
-&printer(@sortRang);
+    @sortRang = reverse sort(@rang);
+    &printer(@sortRang);
 }
 
 sub racunajSumu {
