@@ -7,10 +7,10 @@ while(<>){
 foreach (@zapisi){
         @splitRed = split /:/, $_;
         $datum = &datum();
-        $mjeseci{$datum} += 1;
+        $datumi{$datum} += 1;
     }
 
-    while (my ($k,$v)= each %mjeseci){
+    while (my ($k,$v)= each %datumi){
         
         foreach (0..23){
 		    $sati[$_] = 0;
