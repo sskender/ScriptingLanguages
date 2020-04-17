@@ -1,29 +1,43 @@
 #!/usr/bin/perl -w
 
-foreach $file (@ARGV) {
+while(<>){
+    push @zapisi, $_;
+    @splitRed = split /:/, $_;
+    $datum = &datum();
+    $datumi{$datum} += 1;
+}
 
-	open LOGDAT, "<", "$file";
+    while (my ($k,$v)= each %datumi){
+        foreach (0..23){
+		    $sati[$_] = 0;
+	    }
 
-	foreach (0..23){
-		$sati[$_] = 0;
-	}
-	
-	while (defined ($redak = <LOGDAT>)) {
-		 @splitRed = split /:/, $redak;
-		 $sat = $splitRed[1];
-		 $sati[$sat] += 1;		
-	}
-	@datum = split / /, $splitRed[0];
-	$datum[3]=~ s|^.*\[(.{2}/.{3}/.{4}).*$|$1|;
+        foreach (@zapisi){
+        @splitRed = split /:/, $_;
+        $datum = &datum();
 
-	print "Datum: " . $datum[3] . "\n" . "sat : broj pristupa\n";
-	print "-------------------------------\n";				
+            if($datum eq $k){
+                $sat = $splitRed[1];
+                $sati[$sat] += 1;
+            }
+        }
+        &printer($k);
+    }
 
-	$indeks = 0;
+sub printer{
+    my ($datum) = @_;
+	print "Datum: " . $datum . "\n" . "sat : broj pristupa\n";
+	print "-------------------------------\n";
+
+    $indeks = 0;
 	foreach (@sati) {
 		printf (" %02d : %s", $indeks++ , $_ . "\n");
          }
 	print "\n";
 }
 
-
+sub datum{
+    @dio = split / /, $splitRed[0];
+    $dio[3]=~ s|^.*\[(.{2}/.{3}/.{4}).*$|$1|;
+    return $dio[3];
+}

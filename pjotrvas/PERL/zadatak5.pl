@@ -1,35 +1,45 @@
 #!/usr/bin/perl -w
 
-$noRed=0;
+foreach $file (@ARGV) {
 
-chomp($faktori=<>);
+	open LOGDAT, "<", "$file" or die "Cant open file: $_";
+   
+    chomp($faktori=<LOGDAT>);
+    @faktori=split /;/, $faktori;
+    
+    $noRed=0;
+	while (defined ($redak = <LOGDAT>)) {
+        ($jmbag, $ime, $prezime, @komponente) = split /;/, $redak;
 
-@faktori=split /;/, $faktori;
+        $sumaRedak = &racunajSumu(@komponente);     
+   
+        $rang[$noRed]=sprintf("%06.2f;%s;%s;%s", $sumaRedak, $jmbag, $prezime, $ime);
+        $noRed++; 
+    }
 
-while(defined ($redak=<>)){
-    @redak=split /;/, $redak;
-    $jmbag=$redak[0];
-    $ime=$redak[1];
-    $prezime=$redak[2];
-
-    splice @redak, 0, 3;
-    $sumaRedak=0;
-    $i=0;
-    foreach (@redak){
-        $_=~ s/-/0/;
-        $sumaRedak+=$faktori[$i]*$_;
-        ++$i;
-    } 
-    $rang[$noRed]=sprintf("%06.2f;%s;%s;%s", $sumaRedak, $jmbag, $prezime, $ime);
-   $noRed++; 
+    @sortRang = reverse sort(@rang);
+    &printer(@sortRang);
 }
 
-@sortRang=reverse sort (@rang);
-$noRed=1;
+sub racunajSumu {
+    @komponente = @_;
+    $sumaRedak=0;
+    $i=0;
+            foreach (@komponente){
+            $_=~ s/-/0/;
+            $sumaRedak+=$faktori[$i]*$_;
+            ++$i;
+    } 
+    return $sumaRedak;
+}
 
-foreach (@sortRang) {
-    @redak=split /;/, $_;
-    printf("%3d. %-32s:% 6.2f\n", $noRed, "$redak[2], $redak[3] ($redak[1])", $redak[0]);
-     $noRed++;
+sub printer {
+    @rang =  @_;
+    $pozicija = 1;
+
+    foreach (@rang) {
+    ($sumaRedak, $jmbag, $prezime, $ime) = split /;/, $_;
+    printf("%3d. %-32s:% 6.2f\n", $pozicija, "$ime, $prezime ($jmbag)", $sumaRedak);
+    $pozicija++;
  }
-
+}
