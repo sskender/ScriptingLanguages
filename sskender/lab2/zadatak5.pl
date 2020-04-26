@@ -5,7 +5,7 @@ use diagnostics;
 my $file_name = $ARGV[0];
 my $success = open LOG, "<", $file_name;
 if (! $success) {
-    die "File $file_name can not be opened"
+    die "File $file_name can not be opened";
 }
 
 my @components;             # list of components
