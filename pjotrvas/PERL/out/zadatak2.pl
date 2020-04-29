@@ -1,4 +1,3 @@
-%names = ();
 %email_count = ();
 
 while (<>) {
@@ -9,16 +8,12 @@ while (<>) {
 
     @name_splitted = split /:/, $form_splitted[0];
 
-    $name = $name_splitted[1];
-
     @email_splitted = split />/, $form_splitted[1];
     $email = $email_splitted[0];
 
-    if (! defined ($name) || ! defined ($email)) {
+    if (! defined ($email)) {
         next;
     }
-
-    $names{$email} = $name;
     $email_count{$email} += 1;
 }
 
