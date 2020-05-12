@@ -1,4 +1,4 @@
-import os, re
+import os, re, sys
 
 students_map = dict()       # jmbag => (surname, name)
 lab_jmbag_score = dict()    # lab => {jmbag => total}
@@ -17,6 +17,8 @@ def process_lab_group(lab, lab_group_data):
             lab_jmbag_score[lab][jmbag] = score
         else:
             print("Duplicate error: %s" % jmbag)
+            print_scores()
+            sys.exit(1)
 
 def main():
     # load students
