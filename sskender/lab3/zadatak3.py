@@ -17,7 +17,7 @@ def process_lab_group(lab, lab_group_data):
             lab_jmbag_score[lab][jmbag] = score
         else:
             print("Duplicate error: %s" % jmbag)
-            print_scores()
+            #print_scores() # dont print scores, just exit on error ???
             sys.exit(1)
 
 def main():

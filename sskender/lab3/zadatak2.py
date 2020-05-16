@@ -4,7 +4,7 @@ def hausdorff(data):
     result = []
     for i in range(1, 10):
         Q = round((i / 10) * len(data))
-        result.append(data[Q-1])
+        result.append(data[Q-1]) # eg 40th element is 39th in list ???
     return result
 
 def main():
