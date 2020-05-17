@@ -59,10 +59,10 @@ else:
     umnozak = pomnoziMatrice(prvaMatrica, drugaMatrica)
 
 print("{} {}".format(umnozak[0], umnozak[1]))
-izlaznaDatoteka.write("{} {}\n".format(umnozak[0], umnozak[1]))
+izlaznaDatoteka.write("{} {}".format(umnozak[0], umnozak[1]))
 
 for key in umnozak[2]:
     print("{} {} {}".format(key[0], key[1], umnozak[2].get(key)))
-    izlaznaDatoteka.write("{} {} {}\n".format(key[0], key[1], umnozak[2].get(key)))
+    izlaznaDatoteka.write("\n{} {} {}".format(key[0], key[1], umnozak[2].get(key)))
 
     
