@@ -25,8 +25,8 @@ for html_file in html_files:
                 else:
                     data_hash[tag] = 1
 
-print("Statistika tagova:\nTag               Broj ponavljanja\n==================================")
+print("Statistika tagova:\nTag             Broj ponavljanja\n================================")
 
 for data in data_hash:
-    print("{:<10s} {:>22d}".format(data, data_hash[data]))
+    print("{:<9s} {:>22d}".format(data, data_hash[data]))
 
