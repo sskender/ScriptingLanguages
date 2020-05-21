@@ -1,8 +1,6 @@
 import sys, re
 
-JEDAN = 1
-
-if len(sys.argv) > JEDAN:
+if len(sys.argv) > 1:
     html_files = sys.argv[1:]
 else:
     exit("POGRESKA: Nedovoljan broj argumenata.")
